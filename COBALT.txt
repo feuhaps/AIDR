@@ -1,0 +1,12 @@
+=========== 
+Note on compiling: 
+
+
+Checked out current state from repository and compiled with:
+	mvn install -Pdev -DskipTests
+	
+Prepared project files with
+	mvn eclipse:eclipse -Pdev -DskipTests
+	
+Due to the setup of different module-files in aidr-task-manager and aidr-db-manager, Eclipse shows up Classpath problems, as for the sub-modules, such as aidr-db-manager-ejb, no Eclipse projects are installed.
+This can be solved by replacing the "-ejb"-suffix with "-ear" in affected .classpath files. 
