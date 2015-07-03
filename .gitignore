@@ -23,14 +23,5 @@ local.properties
 # OS X Generated Files
 .DS_Store
 
-#################
-## Eclipse
-#################
-
-*.project
-*.classpath
-*.settings
-
-
 # Locally stored "Eclipse launch configurations"
 *.launch
