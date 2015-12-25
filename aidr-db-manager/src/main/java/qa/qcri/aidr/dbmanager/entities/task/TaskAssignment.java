@@ -31,8 +31,17 @@ public class TaskAssignment implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 3761125422251764759L;
+	@EmbeddedId
+	@AttributeOverrides({
+		@AttributeOverride(name = "documentId", column = @Column(name = "documentID", nullable = false)),
+		@AttributeOverride(name = "userId", column = @Column(name = "userID", nullable = false)) })
 	private TaskAssignmentId id;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "documentID", nullable = false, insertable = false, updatable = false)
+	@JsonBackReference
 	private Document document;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "assignedAt", nullable = false, length = 19)
 	private Date assignedAt;
 
 	public TaskAssignment() {
@@ -54,10 +63,6 @@ public class TaskAssignment implements java.io.Serializable {
 		this.setId(new TaskAssignmentId(documentId, userId));
 	}
 	
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "documentId", column = @Column(name = "documentID", nullable = false)),
-			@AttributeOverride(name = "userId", column = @Column(name = "userID", nullable = false)) })
 	public TaskAssignmentId getId() {
 		return this.id;
 	}
@@ -66,9 +71,6 @@ public class TaskAssignment implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "documentID", nullable = false, insertable = false, updatable = false)
-	@JsonBackReference
 	public Document getDocument() {
 		return this.document;
 	}
@@ -77,8 +79,6 @@ public class TaskAssignment implements java.io.Serializable {
 		this.document = document;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "assignedAt", nullable = false, length = 19)
 	public Date getAssignedAt() {
 		return this.assignedAt;
 	}

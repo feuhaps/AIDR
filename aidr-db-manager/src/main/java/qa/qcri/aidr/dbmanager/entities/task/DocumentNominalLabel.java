@@ -35,9 +35,23 @@ public class DocumentNominalLabel implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 780942456619903470L;
+	@EmbeddedId
+	@AttributeOverrides({
+		@AttributeOverride(name = "documentId", column = @Column(name = "documentID", nullable = false)),
+		@AttributeOverride(name = "nominalLabelId", column = @Column(name = "nominalLabelID", nullable = false)),
+		@AttributeOverride(name = "userId", column = @Column(name = "userID", nullable = false)) })
 	private DocumentNominalLabelId id;
+	@Version
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "timestamp", nullable = false, length = 19)
 	private Date timestamp;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "nominalLabelID", nullable = false, insertable = false, updatable = false)
+	@JsonBackReference
 	private NominalLabel nominalLabel;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "documentID", nullable = false, insertable = false, updatable = false)
+	@JsonBackReference
 	private Document document;
 
 	public DocumentNominalLabel() {
@@ -50,11 +64,6 @@ public class DocumentNominalLabel implements java.io.Serializable {
 		this.document = document;
 	}
 
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "documentId", column = @Column(name = "documentID", nullable = false)),
-			@AttributeOverride(name = "nominalLabelId", column = @Column(name = "nominalLabelID", nullable = false)),
-			@AttributeOverride(name = "userId", column = @Column(name = "userID", nullable = false)) })
 	public DocumentNominalLabelId getId() {
 		return this.id;
 	}
@@ -63,9 +72,6 @@ public class DocumentNominalLabel implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Version
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "timestamp", nullable = false, length = 19)
 	public Date getTimestamp() {
 		return this.timestamp;
 	}
@@ -74,9 +80,6 @@ public class DocumentNominalLabel implements java.io.Serializable {
 		this.timestamp = timestamp;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "nominalLabelID", nullable = false, insertable = false, updatable = false)
-	@JsonBackReference
 	public NominalLabel getNominalLabel() {
 		return this.nominalLabel;
 	}
@@ -85,9 +88,6 @@ public class DocumentNominalLabel implements java.io.Serializable {
 		this.nominalLabel = nominalLabel;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "documentID", nullable = false, insertable = false, updatable = false)
-	@JsonBackReference
 	public Document getDocument() {
 		return this.document;
 	}

@@ -20,6 +20,13 @@ public class NominalLabelEvaluationData implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -6719640953713839610L;
+	@EmbeddedId
+	@AttributeOverrides({
+		@AttributeOverride(name = "documentId", column = @Column(name = "documentID", nullable = false)),
+		@AttributeOverride(name = "crisisId", column = @Column(name = "crisisID", nullable = false)),
+		@AttributeOverride(name = "nominalLabelId", column = @Column(name = "nominalLabelID", nullable = false)),
+		@AttributeOverride(name = "nominalAttributeId", column = @Column(name = "nominalAttributeID", nullable = false)),
+		@AttributeOverride(name = "wordFeatures", column = @Column(name = "wordFeatures", length = 65535)) })
 	private NominalLabelEvaluationDataId id;
 
 	public NominalLabelEvaluationData() {
@@ -29,13 +36,6 @@ public class NominalLabelEvaluationData implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "documentId", column = @Column(name = "documentID", nullable = false)),
-			@AttributeOverride(name = "crisisId", column = @Column(name = "crisisID", nullable = false)),
-			@AttributeOverride(name = "nominalLabelId", column = @Column(name = "nominalLabelID", nullable = false)),
-			@AttributeOverride(name = "nominalAttributeId", column = @Column(name = "nominalAttributeID", nullable = false)),
-			@AttributeOverride(name = "wordFeatures", column = @Column(name = "wordFeatures", length = 65535)) })
 	public NominalLabelEvaluationDataId getId() {
 		return this.id;
 	}

@@ -23,6 +23,9 @@ public class CustomUiTemplate implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 4549440030648604692L;
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "customUITemplateID", unique = true, nullable = false)
 	private Long customUitemplateId;
 	private Long crisisID;
 	private Long nominalAttributeID;
@@ -56,9 +59,6 @@ public class CustomUiTemplate implements java.io.Serializable {
 		this.updated = updated;
 	}
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "customUITemplateID", unique = true, nullable = false)
 	public Long getCustomUitemplateId() {
 		return this.customUitemplateId;
 	}

@@ -25,6 +25,11 @@ public class TaskAnswer implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 5454646279615445606L;
+	@EmbeddedId
+	@AttributeOverrides({
+		@AttributeOverride(name = "taskId", column = @Column(name = "taskID", unique = true, nullable = false)),
+		@AttributeOverride(name = "documentId", column = @Column(name = "documentID", nullable = false)),
+		@AttributeOverride(name = "userId", column = @Column(name = "userID", nullable = false)) })
 	private TaskAnswerId id;
 	private Date timestamp;
 	private String answer;
@@ -47,11 +52,6 @@ public class TaskAnswer implements java.io.Serializable {
 	}
 
 
-	@EmbeddedId
-	@AttributeOverrides({
-		@AttributeOverride(name = "taskId", column = @Column(name = "taskID", unique = true, nullable = false)),
-		@AttributeOverride(name = "documentId", column = @Column(name = "documentID", nullable = false)),
-		@AttributeOverride(name = "userId", column = @Column(name = "userID", nullable = false)) })
 	public TaskAnswerId getId() {
 		return this.id;
 	}
