@@ -31,8 +31,13 @@ public class TaskAnswer implements java.io.Serializable {
 		@AttributeOverride(name = "documentId", column = @Column(name = "documentID", nullable = false)),
 		@AttributeOverride(name = "userId", column = @Column(name = "userID", nullable = false)) })
 	private TaskAnswerId id;
+	@Version
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "timestamp", nullable = false, length = 19)
 	private Date timestamp;
+	@Column(name = "answer", nullable = false, length = 65535, columnDefinition="Text")
 	private String answer;
+	@Column(name = "fromTrustedUser", nullable = false)
 	private boolean fromTrustedUser;
 
 	public TaskAnswer() {
@@ -60,9 +65,6 @@ public class TaskAnswer implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Version
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "timestamp", nullable = false, length = 19)
 	public Date getTimestamp() {
 		return this.timestamp;
 	}
@@ -71,7 +73,6 @@ public class TaskAnswer implements java.io.Serializable {
 		this.timestamp = timestamp;
 	}
 
-	@Column(name = "answer", nullable = false, length = 65535, columnDefinition="Text")
 	public String getAnswer() {
 		return this.answer;
 	}
@@ -80,7 +81,6 @@ public class TaskAnswer implements java.io.Serializable {
 		this.answer = answer;
 	}
 
-	@Column(name = "fromTrustedUser", nullable = false)
 	public boolean isFromTrustedUser() {
 		return this.fromTrustedUser;
 	}
